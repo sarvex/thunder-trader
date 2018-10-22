@@ -1,3 +1,6 @@
+#include <sys/types.h>
+#include <sys/stat.h> // umask
+#include <unistd.h> // chdir
 #include <string>
 #include <iostream>
 #include <memory>
@@ -44,8 +47,6 @@
 #include <boost/log/utility/setup/console.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
 #include <boost/log/attributes/named_scope.hpp>
-
-
 
 #include "public.h"
 namespace logging = boost::log;

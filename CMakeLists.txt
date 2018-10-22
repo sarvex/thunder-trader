@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.10)
 project(auto_trade_machine)
 set (Tutorial_VERSION_MAJOR 1)
 set (Tutorial_VERSION_MINOR 0)
@@ -11,9 +12,9 @@ configure_file (
   "${PROJECT_BINARY_DIR}/common/config.h"
   )
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-Bsymbolic")
-    set(BOOST_THREAD "boost_thread-mt")
+    #set(BOOST_THREAD "boost_thread-mt")
 else()
-    set(BOOST_THREAD "boost_thread")
+    #set(BOOST_THREAD "boost_thread")
 endif()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
@@ -27,13 +28,24 @@ include_directories("${PROJECT_SOURCE_DIR}/trade/md_plugins")
 include_directories("${PROJECT_SOURCE_DIR}/trade/trade_plugins")  
 include_directories("${PROJECT_SOURCE_DIR}/common/tick")  
 
-set(libs dl boost_system boost_filesystem pthread boost_thread boost_date_time boost_serialization boost_log_setup boost_log)
+# set(Boost_NO_SYSTEM_PATHS TRUE)
+# set(BOOST_ROOT "/usr/local/")
+# set(BOOST_LIBRARY_DIRS "${BOOST_ROOT}/lib")
+# set(BOOST_INCLUDE_DIRS "${BOOST_ROOT}/include")
+
+set(libs 
+    dl 
+    ${Boost_SYSTEM_LIBRARY}
+    ${Boost_FILESYSTEM_LIBRARY}
+    pthread boost_thread boost_date_time boost_serialization boost_log_setup 
+    ${Boost_LOG_LIBRARY}
+    )
 add_definitions(-DBOOST_SPIRIT_THREADSAFE)
 add_definitions(-DBOOST_ALL_DYN_LINK)
 
 message(STATUS "${BOOST_THREAD}")
 add_definitions(-DBOOST_SPIRIT_THREADSAFE)
-find_package(Boost REQUIRED COMPONENTS regex system thread serialization date_time)
+find_package(Boost 1.65 EXACT REQUIRED COMPONENTS regex system thread serialization date_time)
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)

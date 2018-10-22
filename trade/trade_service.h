@@ -91,8 +91,6 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem.hpp>
 
-
-
 #include "SeverityLevel.h"
 
 using namespace std;
