@@ -28,10 +28,10 @@ include_directories("${PROJECT_SOURCE_DIR}/trade/md_plugins")
 include_directories("${PROJECT_SOURCE_DIR}/trade/trade_plugins")  
 include_directories("${PROJECT_SOURCE_DIR}/common/tick")  
 
-# set(Boost_NO_SYSTEM_PATHS TRUE)
-# set(BOOST_ROOT "/usr/local/")
-# set(BOOST_LIBRARY_DIRS "${BOOST_ROOT}/lib")
-# set(BOOST_INCLUDE_DIRS "${BOOST_ROOT}/include")
+set(Boost_NO_SYSTEM_PATHS TRUE)
+set(BOOST_ROOT "/usr/local/")
+set(BOOST_LIBRARY_DIRS "${BOOST_ROOT}/lib")
+set(BOOST_INCLUDE_DIRS "${BOOST_ROOT}/include")
 
 set(libs 
     dl 
@@ -45,7 +45,7 @@ add_definitions(-DBOOST_ALL_DYN_LINK)
 
 message(STATUS "${BOOST_THREAD}")
 add_definitions(-DBOOST_SPIRIT_THREADSAFE)
-find_package(Boost 1.65 EXACT REQUIRED COMPONENTS regex system thread serialization date_time)
+find_package(Boost 1.68 EXACT REQUIRED COMPONENTS regex system thread serialization date_time)
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
